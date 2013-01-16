@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\begin{document}
+
+\title{}
+\author{Pierre L. Bhoorasingh}
+\date{\today}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+
+Global warming has become an important scientific and political issue. The effects of greenhouse gases on climate change has led to efforts to reduce atmospheric carbon dioxide levels. A multifaceted approach is widely accepted as the means to tackle this issue. Pacala and Socolow proposed the wedge theory as a framework in order to stabilize global greenhouse gas emissions. The total wedge is taken as what is required to stabilize the current rate of increase of atmospheric carbon dioxide levels. This total wedge is divided into smaller wedges which are attributed to various methods for reducing atmospheric carbon dioxide. 
+
+\subsection{The Greenhouse Effect and Fossil Fuels}
+
+The greenhouse effect describes the absorption of thermal radiation by atmospheric greenhouse gases, which is then re-radiated resulting in an elevation of the planet's temperature. Increased levels of greenhouse gases therefore leads to an increase in atmospheric temperature. Greenhouse gases include water vapor, carbon dioxide, and nitrous oxide. The levels of these gases are known to have fluctuated over time, with corresponding fluctuations in average temperature. Recent trends show fluctuations no longer occurring, specifically with carbon dioxide levels on a continuous upward trend. This has correlated with increases in average planetary temperatures, and studies into the long term consequences of this global warming has motivated work in various sectors to reduce and remove greenhouse gas emissions.
+
+\subsection{Fuels of the Future}
+
+\subsection{Automatic Mechanism Generation}
+
+\subsubsection{Network Generation}
+Automatic network generation systems involve methods that teach chemistry to a computer. These automatic systems all have common features. They must have a method to represent atoms, bonds, and other molecular properties. There must be transformation methods to represent reactions in order to convert reactants to products and methods to determine if a molecule generated is unique from all previously generated species. These will enable the generation of all the possible reactions.
+
+\paragraph{Possibly talk about chemical graph theory, SMILES, InChI, etc.}
+
+\subsubsection{Thermodynamic and Kinetic Parameters}
+With the chemical reaction network defined, the thermodynamic and kinetic parameters are needed to fully describe the reaction system. Also, model reduction may also be desired due to the scale of these mechanisms, and kinetic parameters are required to conduct sensitivity analyses.
+
+Describing thermodynamic and rate parameters by hand is taxing, since reaction mechanisms can have a very large number of species and reactions. Computational methods allow for the integration of the various methods to procure and specify these parameters for such large mechanisms. A ranking has to be implemented to ensure preferred methods are attempted before the less desirable, and this ranking is intended to maximize accuracy while minimizing computational cost. There are three general sources of data, both for kinetic and thermodynamic parameters: experimental values, estimation by analogy, and estimation via quantum mechanical calculations.
+
+Well-founded experimental values in databases are the premier data source. Not only do these parameters contain little error, but the high efficiency in extracting a value from a database suits automated systems. However, these coveted values are scare due to the system restrictions and experimental difficulties. For kinetics, most of the species in a mechanism are intermediates, making their detection and measurement and arduous task. Added to the difficulty is the complexity of the reaction environment. These two points lead to the scarcity in kinetic parameters. More data is available for thermodynamic properties, but these data are restricted to the system studied. Therefore, values for stable molecules are accessible, but species such as radical have limited data.  As such, it is not possible to derive a detailed mechanism using experimentally derived values.
+
+Estimated values must therefore be used to completely define these automatically derived reaction networks. The estimations by analogy are approximations of unknown parameters by referencing known values from related molecules or groups. The other is using quantum calculations and applying statistical mechanics to the result to derive the estimates.
+
+\paragraph{Thermodynamics}\mbox{}\\
+Thermodynamic properties can be estimated by analogy using Benson group increment theory. The theory applies derived values for groups to the calculation of thermodynamic properties such as heat of formation, and entropy. A group contains an atom and its ligands. A species is fragmented into its groups, and a thermodynamic property is determined by the summation of the group contributions to that thermodynamic property. Group contributions have been determined for compounds containing a variety of atoms, and can also be applied to free radical intermediate species. This method depends on the availability of the group values, and there are continued efforts to determine new ones.
+
+Calculation of thermodynamic properties via quantum chemistry increasingly becomes possible for automatic network generators due to the continuing advances in computing power. Instances where experimental data are unavailable and group estimations are not possible, these calculations can generate the required thermodynamic properties. A stable species has an energy minimum, and any perturbation in bond length or bond angle will increase the energy of the species. The geometry of the species must be optimized to this energy minimum, and the vibrational frequencies of this geometry calculated. These frequencies are used to generate the total partition function of the molecule, from which thermodynamic properties are derived (See section on Statistical Mechanics). This methodology has a higher computational cost than group additivity due to the complexity of the quantum chemical calculations.
+
+\paragraph{Kinetics}\mbox{}\\
+Kinetic parameters can be estimated on-the-fly by analogy, using the know kinetic parameters for a reaction and applying them to a reaction with undefined rate parameters. This is possible as the potential energy surfaces are similar for reactions of a like nature. Corrections can be applied to increase the accuracy of these estimations, and these corrections improve as more data is collected. This means that the kinetics can be quickly estimated for reaction families with abundant data with insignificant error. Hydrogen abstraction reactions
+
+\subsubsection{Reaction Classes}
+Reaction mechanisms are often explained by drawing arrows to signify the movement of electrons, but this cannot be used computationally to define a reaction pathway. Early attempts to create these classes involved matrix combinations and 
+
+\subsubsection{EXGAS}
+\subsubsection{MAMOX}
+\subsubsection{REACTION}
+\subsubsection{Rule Input Network Generator (RING)}
+\subsubsection{Reaction Mechanism Generator (RMG)}
+
+The constant rise in carbon dioxide levels has been attributed to the industrial advances. These advances have largely been driven by the combustion of fossil fuels, that produces carbon dioxide as a major waste product. The 
+
+\section{Methodology}
+
+\subsection{Molecular Geometry}
+\subsubsection{Internal Coordinates}
+\subsubsection{Cartesian Coordinates}
+\subsubsection{Distance Geometry}
+\subsubsection{Rule-based Geometry}
+
+\subsection{Computational Tools}
+\subsubsection{Distance Geometry}
+\paragraph{RDKit}
+\subsubsection{Quantum Chemistry}
+\paragraph{Gaussian}
+\paragraph{MOPAC}
+
+\subsection{Transition State Searches}
+\subsubsection{Surface Walking}
+\subsubsection{Double-Ended Searches}
+
+\section{Aims}
+\section{Preliminary Results}
+\section{Conclusions}
+
+\end{document}
