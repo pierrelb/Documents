@@ -58,10 +58,32 @@ Reaction mechanisms are often explained by drawing arrows to signify the movemen
 The constant rise in carbon dioxide levels has been attributed to the industrial advances. These advances have largely been driven by the combustion of fossil fuels, that produces carbon dioxide as a major waste product. The 
 
 \subsection{Molecular Geometry}
-\subsubsection{Internal Coordinates}
-\subsubsection{Cartesian Coordinates}
-\subsubsection{Distance Geometry}
-\subsubsection{Rule-based Geometry}
+
+Molecules need to be represented in three dimensional space before electronic structure optimization can take place. There are different methods to represent the coordinates of the atoms, as well as methods to convert two dimensional molecular graph representations to three dimensional structures.
+
+\subsubsection{Geometry Representation}
+
+These methods describe molecules in three dimensional space. From these representations, the molecules can be pictorially represented, and altered to optimize the molecular energies.
+
+\paragraph{Cartesian Coordinates}\mbox{}\\
+
+The atoms of a molecule are assigned coordinates in three dimensional space based on a cartesian axis. Each atom requires their full three point coordinate in order to be positioned. The atoms are, therefore, completely independent of each other.
+
+\paragraph{Internal Coordinates}\mbox{}\\
+
+The atoms of a molecule are represented relative to each other, based on distance, angle, and dihedral angle. The first atom is the reference atom. The second atom must be assigned a distance from the first to be positioned. The third atom requires its distance from the second atom, as well as the angle between the lines connecting itself and the second atom, and the second and first atoms. Except for these three atoms, all other atoms require their distances relative to an atom, an angle to another atom, as well as a dihedral angle relative to a third.
+
+\subsubsection{Three Dimensional Generation}
+
+Methods to represent the molecule correctly in three dimensional space once provided the atoms and bonds have been developed to aid the geometry generation. 
+
+\paragraph{Distance Geometry}\mbox{}\\
+
+Chemical rules can be applied to determine the atom distances. Based on orbital hybridizations, bonded atom maximum and minimum distances can be set. Also, atoms not bonded to each other but reside within the same molecule have a minimum distance associated with the van der Waals values, and maximum distance based on their connectivity through the molecule. Atoms on separate molecules have minimum separations based on the van der Waals distances, and infinitely large maximum distances. These rules can help generate possible three dimensional structures.
+
+\paragraph{Rule-based Geometry}\mbox{}\\
+
+Empirical rules have been developed and can be applied to molecules to determine their geometries. These rules have estimated bond distance and angles for various atom to atom bonds and hybridizations. For example, naphthalene can be derived by the rules of benzene as it is essentially two fused benzene rings. However, It would not be prudent to apply the rules of carbon-carbon single and double bonds to naphthalene, as this would neglect the effects of the aromatic pi bonds.
 
 \subsection{Computational Tools}
 \subsubsection{Distance Geometry}
@@ -76,11 +98,37 @@ The constant rise in carbon dioxide levels has been attributed to the industrial
 \section{Preliminary Results}
 talk about H abstraction
 \section{Aims}
-\subsection{Rationale}
-\subsection{Experimental Plan}
-\subsection{Interpretations}
-\subsection{Pitfalls}
-\subsection{Alternative}
+
+Below are the aims for my thesis.
+
+\subsection{Fuel surrogate and target kinetics}
+\subsubsection{Rationale}
+\subsubsection{Experimental Plan}
+\subsubsection{Interpretations}
+\subsubsection{Pitfalls}
+\subsubsection{Alternative}
+
+\subsection{Transition state geometry estimation}
+\subsubsection{Rationale}
+\subsubsection{Experimental Plan}
+\subsubsection{Interpretations}
+\subsubsection{Pitfalls}
+\subsubsection{Alternative}
+
+\subsection{Transition state theory}
+\subsubsection{Rationale}
+\subsubsection{Experimental Plan}
+\subsubsection{Interpretations}
+\subsubsection{Pitfalls}
+\subsubsection{Alternative}
+
+\subsection{Application to fuel and validate the model to available data}
+\subsubsection{Rationale}
+\subsubsection{Experimental Plan}
+\subsubsection{Interpretations}
+\subsubsection{Pitfalls}
+\subsubsection{Alternative}
+
 \section{Conclusions}
 
 \end{document}
