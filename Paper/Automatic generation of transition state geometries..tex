@@ -14,9 +14,15 @@
 
 \section{Methods}
 
-\section{Results}
+\subsection{Molecular bounds matrix}
+A bounds matrix defines the minimum and maximum distances in Angstroms between any two atoms. An index is associated with each atom and the row and column of the matrix with a given index represents the related atom. Atoms on different molecules can be infinitely distant so large numbers are used as their maximum distances. Their minimum distances are defined by the sum of the van der Waals radii of the relevant atoms. The range used for bonded atoms is determined by bond length values. Ranges for atoms within a molecule but not bonded to one another are determined by the knowledge that the maximum distances occur when all atoms between are aligned in a straight line, and the minimum is limited by steric hindrance and interatomic forces.
 
-\section{Discussion}
+\subsection{Conformer generation}
+Initial stable molecular configuration estimates were generated using RDKit. Also, a molecular bounds matrix can also be processed by RDKit to generate and optimize a molecular structure within the limits of the matrix.
+
+\section{Results and Discussion}
+
+\section{Conclusions}
 
 \end{document}
 
