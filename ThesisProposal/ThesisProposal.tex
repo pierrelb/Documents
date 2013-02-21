@@ -100,20 +100,39 @@ talk about H abstraction
 
 Below are the aims for my thesis.
 
-\subsection{Aim 1: Automatic transition state searches from the reactant and product geometries.}
+\subsection{Aim 1: Generate estimate geometries to enable transition state searches.}
 \subsubsection{Rationale}
 
-Kinetic parameters for mechanism generation are ideally obtained from experimental data. Due to the difficulties in measuring intermediate reaction rates, experimental data are often sparse. Group additivity methods can be applied to estimate unknown rates, but fail when data are unavailable for analogous reactions. Statistical mechanics can be applied via transition state theory to calculate rate parameters, but require transitions state geometries. These geometries are obtained by deriving an estimate and optimizing it to a first order saddle point along the potential energy surface. These need to be generated automatically in order to be coupled with a reaction mechanism generator.
+Successful calculation of an optimized transition state geometry depends on the quality of the estimate geometry provided. Search algorithms have been developed to generate such an estimate once provided the reactant and product geometries. These double-ended methods use various interpolation methods to shift the reactant and product geometries to an intermediate configuration that will ideally approach the peak of the potential energy surface. Due to the interpolation strategies applied by these search methods, the reacting atoms need to be positioned in a configuration that will likely result in a reaction. This means 
 
 \subsubsection{Experimental Plan}
-
-Distance geometry 
-
 \subsubsection{Interpretations}
 \subsubsection{Pitfalls}
 \subsubsection{Alternative}
 
-\subsection{Aim 2: Calculate kinetic parameters from the transition state geometries via application of transition state theory.}
+\subsection{Aim 2: Apply search strategies to optimize transition state geometries.}
+\subsection{Aim 3: Investigate the various forms of transition state theory to determine best practices for their application.}
+\subsection{Aim 4: Build the detailed model for the biofuel to validate improvements in kinetics.}
+
+\subsection{Aim 1: Automatic transition state searches from the reactant and product geometries.}
+\subsubsection{Rationale}
+
+Kinetic parameters for mechanism generation are ideally obtained from experimental data. Due to the difficulties in measuring intermediate reaction rates, experimental data are often sparse. Group additivity methods can be applied to estimate unknown rates, but fail when data are unavailable for analogous reactions. Statistical mechanics can be applied via transition state theory to calculate rate parameters, but require transitions state geometries. These geometries are obtained by deriving an estimate and optimizing it to a first order saddle point along the potential energy surface. Manual geometry estimation is not feasible for use with an automatic network generator, therefore an estimation procedure must be developed that can be referenced by the network generator.
+
+\subsubsection{Experimental Plan}
+
+The movement of active atoms is known for a given reaction family, as the reactants and products are declared. The active atoms in reacting molecules must be positioned in a reactive state. The atoms are placed by distance geometry, where the minimum and maximum distances between the active atoms are altered to mimic their positions prior to reacting. The 'inactive' atom positions are determined also by distance geometry, but these distances are estimated by standard bond lengths and angles based on the atoms and the associated bond orders.
+
+As the molecules of the reactants and products are now positioned for a reaction, the transition state geometry is expected to lie between these two geometries. Methods to interpolate between these geometries have been studied with varied success, with the quasi-synchronous transit search being the first. This method will be used to determine the transition state geometry estimate. This estimate will then be used as an initial guess for a potential energy surface-walking search to locate the transition state geometry.
+
+\subsubsection{Interpretations}
+
+
+
+\subsubsection{Pitfalls}
+\subsubsection{Alternative}
+
+\subsection{Aim 2: Determine group contributions to transition state geometries.}
 \subsubsection{Rationale}
 
 Generation of transition state geometries is of chemical interest as it provides mechanistic insight to a reaction. From the perspective of mechanism generation, it is only the first step in determining the desired rate parameters. The optimized geometries of the transition state and the reactants can be used to derive the necessary properties to calculate the rate parameters via transition state theory. These required the derivation of the total partition functions as well as information about their positions on the potential energy surface.
@@ -123,7 +142,17 @@ Generation of transition state geometries is of chemical interest as it provides
 \subsubsection{Pitfalls}
 \subsubsection{Alternative}
 
-\subsection{Aim 3: Build the detailed combustion model for butyl benzene.}
+\subsection{Aim 3: Calculate kinetic parameters from the transition state geometries via application of transition state theory.}
+\subsubsection{Rationale}
+
+Generation of transition state geometries is of chemical interest as it provides mechanistic insight to a reaction. From the perspective of mechanism generation, it is only the first step in determining the desired rate parameters. The optimized geometries of the transition state and the reactants can be used to derive the necessary properties to calculate the rate parameters via transition state theory. These required the derivation of the total partition functions as well as information about their positions on the potential energy surface.
+
+\subsubsection{Experimental Plan}
+\subsubsection{Interpretations}
+\subsubsection{Pitfalls}
+\subsubsection{Alternative}
+
+\subsection{Aim 4: Build the detailed combustion model for butyl benzene.}
 
 
 
