@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \begin{document}
 
-\title{Automatic generation of transition state geometries.}
+\title{Using distance geometry for automatic generation of transition state geometries.}
 \author{Pierre L. Bhoorasingh, Richard H. West}
 \date{\today}
 \maketitle
@@ -10,27 +10,43 @@
 \paragraph{Abstract}
 
 \newpage
+\twocolumn
 \section{Introduction}
-The effects of global warming and rising energy costs continue to motivate work in fuel combustion. Renewable fuels and advanced engines with higher efficiencies to use these fuels are required to help quell the rising energy demands. The costs associated with engine design and fuel development require modeling solutions to reduce the steps and focus the research.
+The effects of global warming continue to motivate work in fuel combustion. Transitioning to renewable fuels and advanced engines with higher efficiencies requires better understanding of combustion. The costs associated with engine design and fuel development presents a large barrier to the adoption of new fuel technology.
 
-Detailed kinetic models provide insight into the complex chemistry of combustion, and can be used to develop models to aid engine design. These models can become predictive with the improvement of the methods used to generate the kinetic parameters. Rate parameters are ideally used from experimental data, but the difficulty in obtaining this data means relatively few reactions have been accurately determined. (Speak more on the difficulties)
+Detailed kinetic models provide insight into the complex chemistry of combustion, and these models can become predictive with the improvement of the methods used to generate the kinetic parameters. Automatic network generators, such as Reaction Mechanism Generator (RMG), uses chemical graph theory and thermodynamic and rate estimation methods to build such detailed kinetic models. Preferentially, rate parameters are used from experimental data, but these were often  determined at different conditions to those desired for combustion. Using regression with this data to determine the large number of required rates is undesirable (10.1021/jp011827y).
 
-(Speak about estimation methods)
+This lack of experimental data means most kinetic models depend on estimation methods to determine the rate parameters, pre-exponential factors, and activation energies. A commonly used method generates kinetic parameters for a reaction with unknown rates by correlation from reactions that share reactive moiety. The error in these estimates decrease with the number of reactions with known kinetic parameters, but many families of reactions have sparse data sets.
 
-(Introduce your work - e.g. automatic generation has been identified as a 'Grand Challenge', etc.)
+Classical transition state theory (TST) can be used to calculate reaction rates for many narrow barrier reactions. This requires finding the first order saddle point along the minimum energy pathway from reactants to products. Advances in computing power has removed the geometry optimization bottleneck associated with calculating reaction rates via TST, and this can be used to find most reaction rates with reasonable error. For specific cases, other methods have been developed to handle the artifacts not captured in classical TST (e.g. variational transition state theory for barrierless and loose transition state reactions).
+
+Calculations via these methods require optimized geometries along the reaction pathway, and the search algorithms used require manual inputs of geometry estimates. Replacing these manual inputs with an automated procedure will enable mechanism generation that uses TST for unsatisfactory rate estimates.
+
+We describe an automatic approach that can be coupled with search algorithms already in place in quantum chemistry programs to find transition state geometries. Distance geometry is used to generate and manipulate molecular geometries due to its accuracy, simplicity, and flexibility. Applying this procedure to a database of reactions for hydrogen abstraction, we have determined trends in transition state geometries based on the molecular groups of the reacting molecules. Characterizing these trends will enable better estimation of the transition state geometry, reducing the computational cost of the optimization.
 
 \section{Methods}
 \subsection{Molecular bounds matrix}
-A bounds matrix defines the minimum and maximum distances in Angstroms between any two atoms. An index is associated with each atom and the row and column of the matrix with a given index represents the related atom. Atoms on different molecules can be infinitely distant so large numbers are used as their maximum distances. Their minimum distances are defined by the sum of the van der Waals radii of the relevant atoms. The range used for bonded atoms is determined by bond length values. Ranges for atoms within a molecule but not bonded to one another are determined by the knowledge that the maximum distances occur when all atoms between are aligned in a straight line, and the minimum is limited by steric hindrance and interatomic forces.
+A bounds matrix defines the upper and lower distances (in Angstroms) between each pair of atoms. For bonded atoms, these distances are determined by bond order and hybridization. For non-bonded atoms, the minimum distances are determined by the sum of the van der Waals radii, and the maximum distances are determined by the connectivity of the atoms (if the atoms are on separate molecules, this distance is infinite).
 
 \subsection{Conformer generation}
-Initial stable molecular configuration estimates were generated using RDKit. A molecular bounds matrix can also be processed by RDKit to generate and partially optimize a molecular structure within the limits of the matrix. Low level universal force fields are used to do the optimization. This enables a bounds matrix to be set and used so that reactant and product geometries can be generated so that active atoms in the reaction are positioned close to their reactive positions. Double-ended transition state search methods require this type of positioning of reactant and product geometries before they can be used effectively.
+Initial stable molecular configuration estimates were generated using RDKit. A molecular bounds matrix can also be processed by RDKit to generate and partially optimize a molecular structure within the limits of the matrix, with force fields used for the optimization. A second molecule can be positioned at select points and directions relative to primary molecule by editing the bounds matrix describing distances between the molecules.
 
-\subsection{Double-ended searches and further refinement}
-The double-ended searches are so defined as both ends (reactants and products) of the reaction are required to generate the transition state geometry. Gaussian 09 (G09) and MOPAC 2012 were used for the quantum chemical calculations. The quasi-synchronous transit search in G09 and MOPAC's string-like search method were used to test the efficacy of automation with a double-ended search with semi-empirical method (PM6 in G09, PM7 in MOPAC). These semi-empirical methods were then used on the resulting transition state estimate to further refine the estimate at the level of theory. The M06-2x density functional theory with the 6-31+G (d,p) basis set was used to test the success of this automatic method at higher levels of theory. These higher level calculations were only conducted on the refined semi-empirically generated geometries in order to minimize computing costs.
+For hydrogen abstraction, the bounds matrix editing was automated so that the abstracting radical was positioned between 2.0 {\AA} and 2.1{\AA} from the hydrogen being abstracted, and 2.5 {\AA} and 2.6{\AA} from the atom to which the abstracted hydrogen is bonded.
 
-\subsection{Determining reacting atom distances}
-Editing bounds matrices to setup the double-ended searches requires positioning active atoms in a reactive state. How close those atoms should be positioned were initially determined by hand. A few examples for a given reaction family helped determine an approximate distance between these active atoms. For a hydrogen abstraction reaction, the active atoms are the transferred hydrogen, the atom it leaves (donor), and the atom it forms a bond with (acceptor). For the reactant distances in the double-ended search, the donor and acceptor distance had to be between 2.5 and 2.6 angstroms, and the acceptor and hydrogen distance had to be between 2.0 and 2.1 angstroms. The donor and hydrogen atoms used typical bond length distances. For the products, the same distances were used, except the donor is now the acceptor atom and the acceptor is the donor (the reaction in the reverse direction). It is possible that these distances have been successful due to the similarity in atom groups tested, but further work will be required to determine the effects of group contributions.
+\begin{figure}[htbp]
+\begin{center}
+
+\caption{Molecular bounds matrix describing the limits of the distances between each pair of atoms.}
+\label{default}
+\end{center}
+\end{figure}
+
+
+\subsection{Double-ended searches}
+The double-ended search algorithms have been created to find transition state geometries from reactant and product geometries. These methods require reactant and product geometries in a reactive state (e.g. if a bond is formed, the atoms involved should be positioned relatively close). The quasi-synchronous transit search in Gaussian '09 and MOPAC's SADDLE search were used, with the bounds matrix automatic positioning used to generate the inputs.
+
+\subsection{Geometry optimization}
+Semi-empirical methods were used to search and optimize transition state geometries (PM6 for Gaussian, PM7 for MOPAC). Density functional theory (M06-2x) with the 6-31+G (d,p) basis set was used to test the success of this automatic method at higher levels of theory. These higher level calculations were only conducted on the refined semi-empirically generated geometries in order to minimize computing costs.
 
 \section{Results and Discussion}
 
